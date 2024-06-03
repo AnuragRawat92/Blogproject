@@ -91,7 +91,7 @@ router.post('/register', async (req, res) => {
         // Validate the input
         if (!username || !password) {
             console.log("Validation failed - Missing username or password"); // Debugging validation
-            // return res.status(400).json({ message: "Username and password are required" });
+           
             res.render('admin');
         }
 
