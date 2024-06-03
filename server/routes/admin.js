@@ -91,8 +91,7 @@ router.post('/register', async (req, res) => {
         // Validate the input
         if (!username || !password) {
             console.log("Validation failed - Missing username or password"); // Debugging validation
-           
-            res.render('admin');
+           return res.status(400).json({ message: "Username and password are required" });
         }
 
         // Hash the password
@@ -103,7 +102,7 @@ router.post('/register', async (req, res) => {
         try {
             const user = await User.create({ username, password: hashpassword });
             console.log("User created successfully:", user); // Debugging user creation
-            return res.status(201).json({ message: "User created", user });
+           res.render('admin')
         } catch (err) {
             if (err.code === 11000) { // Duplicate key error
                 console.log("Duplicate username error:", err); // Debugging duplicate error
